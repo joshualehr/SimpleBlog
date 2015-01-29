@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SimpleBlog.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,7 +11,23 @@ namespace SimpleBlog.Controllers
     {
         public ActionResult Login()
         {
-            return Content("Login!");
+            return View(new AuthLogin());
+        }
+
+        [HttpPost]
+        public ActionResult Login(AuthLogin form)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(form);
+            }
+
+            if (form.Username != "rainbow dash")
+            {
+                ModelState.AddModelError("Username", "Username or password isn't 20% cooler");
+                return View(form);
+            }
+            return Content("The form is Valid!");
         }
     }
 }
