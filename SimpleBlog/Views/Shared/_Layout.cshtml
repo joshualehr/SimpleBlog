@@ -1,4 +1,9 @@
-﻿@{
+﻿@using System.Web.Optimization
+{
+    
+}
+
+@{
     Layout = null;
 }
 
@@ -7,13 +12,28 @@
 <html>
     <head>
         <title>@ViewBag.Title - SimpleBlog</title>
+
+        @Styles.Render("~/styles")
     </head>
     <body>
         <header>
             <h1>
                 <a href="@Url.RouteUrl("home")">Simple Blog</a>
+                <i class="glyphicon glyphicon-bell"></i>
             </h1>
-            <a href="@Url.RouteUrl("login")">Login</a>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <p>Welcome back, @User.Identity.Name</p>
+                <a href="@Url.RouteUrl("logout")">Logout</a>
+                if (User.IsInRole("admin"))
+                {
+                    <a href="@Url.Action("index", "Posts", new{area="admin"})">View posts in admin</a>
+                }
+            }
+            else
+            {
+                <a href="@Url.RouteUrl("login")">Login</a>
+            }
         </header>
 
         @RenderBody()
@@ -22,6 +42,7 @@
             &copy; @DateTime.UtcNow.Year
         </footer>
 
+        @Scripts.Render("~/scripts")
         @RenderSection("Scripts", false)
 
     </body>
