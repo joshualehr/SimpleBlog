@@ -1,9 +1,5 @@
 ﻿using NHibernate.Mapping.ByCode;
 using NHibernate.Mapping.ByCode.Conformist;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace SimpleBlog.Models
 {
@@ -13,6 +9,12 @@ namespace SimpleBlog.Models
         public virtual string Username { get; set; }
         public virtual string Email { get; set; }
         public virtual string PasswordHash { get; set; }
+
+        public virtual void SetPassword(string password)
+        {
+            //Change this before production!!!
+            PasswordHash = "IGNORE ME";
+        }
     }
 
     public class UserMap : ClassMapping<User>
