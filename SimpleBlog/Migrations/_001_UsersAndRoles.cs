@@ -1,5 +1,5 @@
-﻿using System.Data;
-using FluentMigrator;
+﻿using FluentMigrator;
+using System.Data;
 
 namespace SimpleBlog.Migrations
 {
