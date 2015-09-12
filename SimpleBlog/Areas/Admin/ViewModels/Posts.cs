@@ -1,9 +1,17 @@
 ﻿using SimpleBlog.Infrastructure;
 using SimpleBlog.Models;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace SimpleBlog.Areas.Admin.ViewModels
 {
+    public class TagChechbox
+    {
+        public int? Id { get; set; }
+        public string Name { get; set; }
+        public bool IsChecked { get; set; }
+    }
+    
     public class PostsIndex
     {
         public PagedData<Post> Posts { get; set; }
@@ -22,5 +30,7 @@ namespace SimpleBlog.Areas.Admin.ViewModels
 
         [Required, DataType(DataType.MultilineText)]
         public string Content { get; set; }
+
+        public IList<TagChechbox> Tags { get; set; }
     }
 }
